@@ -24,10 +24,11 @@ public class Knife4jConfiguration {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
+                .pathMapping("/")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.wanfeng.shop.*.controller"))
-                .paths(PathSelectors.regex("/api/.*"))
+                .apis(RequestHandlerSelectors.basePackage("com.wanfeng.shop"))
+                .paths(PathSelectors.ant("/api/**"))
                 .build();
 
     }

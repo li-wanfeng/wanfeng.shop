@@ -4,7 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.wanfeng.shop"})
 @MapperScan("com.wanfeng.shop.user.mapper")
 public class UserApplication {
     public static void main(String[] args) {
