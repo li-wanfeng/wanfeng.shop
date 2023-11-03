@@ -3,6 +3,8 @@ package com.wanfeng.shop.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wanfeng.shop.user.model.entity.AddressDO;
+import com.wanfeng.shop.user.model.request.AddressRequest;
+import com.wanfeng.shop.util.JsonData;
 
 /**
 * @author 85975
@@ -10,5 +12,13 @@ import com.wanfeng.shop.user.model.entity.AddressDO;
 * @createDate 2023-11-02 15:50:29
 */
 public interface AddressService extends IService<AddressDO> {
+
+    void add(AddressRequest addressRequest);
+
+    JsonData findAddressById(Long id);
+
+    JsonData deleteAddressById(Long id);
+
+    JsonData findAddressList();
 
 }

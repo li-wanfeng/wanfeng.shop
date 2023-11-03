@@ -23,12 +23,18 @@ public enum  BizCodeEnum {
      */
     ACCOUNT_REPEAT(250001,"账号已经存在"),
     ACCOUNT_UNREGISTER(250002,"账号不存在"),
-    ACCOUNT_PWD_ERROR(250003,"账号或者密码错误");
-
+    ACCOUNT_PWD_ERROR(250003,"账号或者密码错误"),
+    ACCOUNT_NOLOGIN(250004,"帐号未登录"),
+    /**
+     * 地址
+     */
+    ADDRESS_PARAMS_INCOMPLETE(260001,"地址参数不完整"),
+    ADDRESS_PARAMS_ERROR(260001,"地址参数错误");
     @Getter
     private int code;
     @Getter
     private String message;
+
 
     private BizCodeEnum(int code,String message){
         this.code = code;

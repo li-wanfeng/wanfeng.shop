@@ -15,12 +15,13 @@
             <result property="region" column="region" jdbcType="VARCHAR"/>
             <result property="detailAddress" column="detail_address" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,user_id,default_status,
         receive_name,phone,province,
         city,region,detail_address,
-        create_time
+        create_time,is_delete
     </sql>
 </mapper>

@@ -1,6 +1,11 @@
 package com.wanfeng.shop.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
@@ -99,5 +104,21 @@ public class CommonUtil {
             saltString.append(ALL_CHAR_NUM.charAt(random.nextInt(ALL_CHAR_NUM.length())));
         }
         return saltString.toString();
+    }
+
+    /**
+     * 响应json数据给前端
+     * @param response
+     * @param message
+     */
+    public static void sendJsonResponse(HttpServletResponse response,Object message) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json; charset=utf-8");
+        try(PrintWriter writer = response.getWriter()) {
+            writer.print(objectMapper.writeValueAsString(message));
+            response.flushBuffer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

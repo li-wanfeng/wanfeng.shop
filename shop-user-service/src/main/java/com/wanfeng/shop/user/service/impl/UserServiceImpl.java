@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wanfeng.shop.enums.BizCodeEnum;
 import com.wanfeng.shop.enums.SendCodeEnum;
+import com.wanfeng.shop.interceptor.LoginInterceptor;
 import com.wanfeng.shop.model.LoginUser;
 import com.wanfeng.shop.user.mapper.UserMapper;
 import com.wanfeng.shop.user.model.entity.UserDO;
 import com.wanfeng.shop.user.model.request.UserLoginRequest;
 import com.wanfeng.shop.user.model.request.UserRegisterRequest;
+import com.wanfeng.shop.user.model.vo.UserVO;
 import com.wanfeng.shop.user.service.NotifyService;
 import com.wanfeng.shop.user.service.UserService;
 import com.wanfeng.shop.util.CheckUtil;
@@ -106,6 +108,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO>
         }
         //未注册 或 密码不正确
         return JsonData.buildResult(BizCodeEnum.ACCOUNT_UNREGISTER);
+    }
+
+    @Override
+    public UserVO userDetail() {
+        LoginUser loginUser = LoginInterceptor.threadLocal.get();
+        UserDO userDO = this.baseMapper.selectById(loginUser.getId());
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(userDO, userVO);
+        return userVO;
     }
 
     private boolean checkEmailUnique(String mail) {

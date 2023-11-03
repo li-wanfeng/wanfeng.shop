@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wanfeng.shop.user.model.entity.UserDO;
 import com.wanfeng.shop.user.model.request.UserLoginRequest;
 import com.wanfeng.shop.user.model.request.UserRegisterRequest;
+import com.wanfeng.shop.user.model.vo.UserVO;
 import com.wanfeng.shop.util.JsonData;
 
 /**
@@ -17,4 +18,6 @@ public interface UserService extends IService<UserDO> {
     JsonData userRegister(UserRegisterRequest registerRequest);
 
     JsonData userLogin(UserLoginRequest loginRequest);
+
+    UserVO userDetail();
 }

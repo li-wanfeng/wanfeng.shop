@@ -63,7 +63,8 @@ public class NotifyController {
     }
 
     @GetMapping("send_code")
-    public JsonData sendRegisterCode(@RequestParam(value = "to", required = true) String to, @RequestParam(value = "captahc", required = true) String captcha, HttpServletRequest request) {
+    public JsonData sendRegisterCode(@RequestParam(value = "to", required = true) String to,
+                                     @RequestParam(value = "captahc", required = true) String captcha, HttpServletRequest request) {
         String captchaKey = getCaptchaKey(request);
         String chcheCaptcha = stringRedisTemplate.opsForValue().get(captchaKey);
         if (null != captcha && captcha.equalsIgnoreCase(chcheCaptcha)) {

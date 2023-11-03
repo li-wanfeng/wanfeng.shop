@@ -1,19 +1,19 @@
-package com.wanfeng.shop.user.model.entity;
+package com.wanfeng.shop.user.model.vo;
 
-
-import java.io.Serializable;
-import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 电商-公司收发货地址表
  * @TableName address
  */
-@TableName(value ="address")
+
 @Data
-public class AddressDO implements Serializable {
+public class AddressVO{
     /**
      * 
      */
@@ -55,20 +55,6 @@ public class AddressDO implements Serializable {
      */
     private String region;
 
-    /**
-     * 详细地址
-     */
-    private String detailAddress;
-
-    /**
-     * 
-     */
-    private Date createTime;
-
-    @TableLogic
-    private Integer isDelete;
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 
 
 }
