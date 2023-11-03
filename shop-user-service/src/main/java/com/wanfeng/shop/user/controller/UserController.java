@@ -1,10 +1,11 @@
 package com.wanfeng.shop.user.controller;
 
+import com.wanfeng.shop.exception.BizException;
 import com.wanfeng.shop.user.model.entity.UserDO;
+import com.wanfeng.shop.user.model.request.UserRegisterRequest;
 import com.wanfeng.shop.user.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.wanfeng.shop.util.JsonData;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,10 +15,10 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
-    @GetMapping
-    public List getUser(){
-        List<UserDO> list = userService.list();
 
-        return list;
+    @PostMapping("/register")
+    public JsonData userRegister(@RequestBody UserRegisterRequest registerRequest) {
+        JsonData res = userService.userRegister(registerRequest);
+        return res;
     }
 }

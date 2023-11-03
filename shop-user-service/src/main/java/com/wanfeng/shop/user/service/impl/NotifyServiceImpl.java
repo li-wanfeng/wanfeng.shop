@@ -37,13 +37,29 @@ public class NotifyServiceImpl implements NotifyService {
                 return JsonData.buildResult(BizCodeEnum.CODE_LIMITED);
             }
         }
-        String codeformat = CommonUtil.getRandomCode(6)+"_"+CommonUtil.getCurrentTimeStamp();
+        String randomCode = CommonUtil.getRandomCode(6);
+        String codeformat = randomCode+"_"+CommonUtil.getCurrentTimeStamp();
         stringRedisTemplate.opsForValue().set(cacheCodeKey, codeformat, CODE_EXPIRED, TimeUnit.MILLISECONDS);
         if (CheckUtil.isEmail(to)) {
             //是邮箱
-            mailService.sendMail(to,SUBJECT,String.format(CONTENT,codeformat));
+            mailService.sendMail(to,SUBJECT,String.format(CONTENT,randomCode));
             return JsonData.buildSuccess("验证码成功发送至邮箱 请注意查收");
         }
         return JsonData.buildResult(BizCodeEnum.CODE_TO_ERROR);
+    }
+
+    @Override
+    public boolean checkCode(SendCodeEnum sendCodeEnum, String code, String to) {
+        String cacheCodeKey = String.format(CacheKey.CHCHE_CODE_KEY, sendCodeEnum.name(), to);
+        String cacheCodeValue = stringRedisTemplate.opsForValue().get(cacheCodeKey);
+        if (StringUtils.isNotBlank(cacheCodeValue)) {
+            cacheCodeValue = cacheCodeValue.split("_")[0];
+            if (cacheCodeValue.equals(code)) {
+                //删除的是邮箱验证码
+                stringRedisTemplate.delete(cacheCodeKey);
+                return true;
+            }
+        }
+        return false;
     }
 }

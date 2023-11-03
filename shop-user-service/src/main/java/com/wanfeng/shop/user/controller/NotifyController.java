@@ -68,7 +68,7 @@ public class NotifyController {
         String chcheCaptcha = stringRedisTemplate.opsForValue().get(captchaKey);
         if (null != captcha && captcha.equalsIgnoreCase(chcheCaptcha)) {
             //成功，发送邮件
-            //删除redis
+            //删除的是 图形验证码
             // TODO 高并发下可能会产生删除失败的问题
             stringRedisTemplate.delete(captchaKey);
             JsonData jsonData = notifyService.sendCode(SendCodeEnum.USER_REGISTER, to);

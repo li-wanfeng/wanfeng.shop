@@ -3,6 +3,8 @@ package com.wanfeng.shop.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wanfeng.shop.user.model.entity.UserDO;
+import com.wanfeng.shop.user.model.request.UserRegisterRequest;
+import com.wanfeng.shop.util.JsonData;
 
 /**
 * @author 85975
@@ -11,4 +13,5 @@ import com.wanfeng.shop.user.model.entity.UserDO;
 */
 public interface UserService extends IService<UserDO> {
 
+    JsonData userRegister(UserRegisterRequest registerRequest);
 }
