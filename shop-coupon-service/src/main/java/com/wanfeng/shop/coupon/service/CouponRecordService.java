@@ -3,6 +3,7 @@ package com.wanfeng.shop.coupon.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wanfeng.shop.coupon.model.entity.CouponRecordDO;
+import com.wanfeng.shop.util.JsonData;
 
 /**
 * @author 85975
@@ -11,4 +12,7 @@ import com.wanfeng.shop.coupon.model.entity.CouponRecordDO;
 */
 public interface CouponRecordService extends IService<CouponRecordDO> {
 
+    JsonData PageCouponRecord(Integer page, Integer size);
+
+    JsonData getCouponRecordById(Long id);
 }
