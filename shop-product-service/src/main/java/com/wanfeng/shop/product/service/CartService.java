@@ -9,4 +9,6 @@ public interface CartService {
     JsonData clearMyCart();
 
     JsonData cartDetail();
+
+    JsonData deleteItemById(Long productId);
 }

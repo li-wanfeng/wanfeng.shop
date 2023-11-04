@@ -114,6 +114,19 @@ public class CartServiceImpl implements CartService {
         return JsonData.buildSuccess(cartVO);
     }
 
+    @Override
+    public JsonData deleteItemById(Long productId) {
+        BoundHashOperations<String, Object, Object> myCartOps = getMyCartOps();
+        Set<Object> keys = myCartOps.keys();
+        for (Object objId : keys) {
+            if (productId.longValue() == ((Long) objId).longValue()) {
+                myCartOps.delete(productId);
+                return JsonData.buildSuccess();
+            }
+        }
+        return JsonData.buildResult(BizCodeEnum.PRODUCT_NO_EXITS);
+    }
+
     /**
      * 获取购物车最新项
      * @param b 是否获取最新价格
