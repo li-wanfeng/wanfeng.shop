@@ -77,6 +77,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO>
 
             //5. 插入数据库
             int insert = this.baseMapper.insert(userDO);
+            //6.发放优惠券  TODO
             return JsonData.buildSuccess();
         }
         return JsonData.buildError("邮箱已经注册");

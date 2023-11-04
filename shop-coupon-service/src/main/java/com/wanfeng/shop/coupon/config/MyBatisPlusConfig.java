@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.wanfeng.shop.coupon.mapper") // todo  更改分页插件的扫描
+@MapperScan("com.wanfeng.shop.coupon.mapper")
 public class MyBatisPlusConfig {
     //mybatis提供的分页拦截器  写法固定
     @Bean
