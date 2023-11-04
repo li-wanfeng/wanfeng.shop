@@ -5,4 +5,6 @@ import com.wanfeng.shop.util.JsonData;
 
 public interface CartService {
     JsonData addProductToCart(CartRequest cartRequest);
+
+    JsonData clearMyCart();
 }

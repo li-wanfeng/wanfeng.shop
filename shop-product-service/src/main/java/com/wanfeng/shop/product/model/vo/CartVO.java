@@ -1,10 +1,12 @@
 package com.wanfeng.shop.product.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -12,33 +14,21 @@ import java.util.Date;
  */
 @Data
 public class CartVO implements Serializable {
-    /**
-     * 商品ID
-     */
-    private Long productId;
-    /**
-     * 标题
-     */
-    private String title;
+    private List<CartItemVO> cartItemVOS;
 
     /**
-     * 老价格
+     * 购买总件数
      */
-    private BigDecimal oldPrice;
+    private Integer totalNum;
 
     /**
-     * 新价格
+     * 购物车总价格
      */
-    private BigDecimal price;
+    private BigDecimal totalPrice;
 
     /**
-     * 购买数量
+     * 购物车实际支付价格
      */
-    private Long payNum;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+    private BigDecimal realPayPrice;
 
 }

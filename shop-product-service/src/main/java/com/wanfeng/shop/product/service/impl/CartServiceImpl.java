@@ -6,6 +6,7 @@ import com.wanfeng.shop.enums.BizCodeEnum;
 import com.wanfeng.shop.interceptor.LoginInterceptor;
 import com.wanfeng.shop.model.LoginUser;
 import com.wanfeng.shop.product.model.request.CartRequest;
+import com.wanfeng.shop.product.model.vo.CartItemVO;
 import com.wanfeng.shop.product.model.vo.CartVO;
 import com.wanfeng.shop.product.model.vo.ProductVO;
 import com.wanfeng.shop.product.service.CartService;
@@ -17,6 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -56,22 +60,30 @@ public class CartServiceImpl implements CartService {
                 return JsonData.buildResult(BizCodeEnum.CART_ADD_FAIL);
             }
             //不存在 新建商品
-            CartVO cartVO = new CartVO();
-            cartVO.setProductId(cartRequest.getProductId());
-            cartVO.setTitle(productVO.getTitle());
-            cartVO.setOldPrice(productVO.getOldPrice());
-            cartVO.setPrice(productVO.getPrice());
-            cartVO.setPayNum(cartRequest.getPayNum());
-            cartVO.setCreateTime(productVO.getCreateTime());
-            myCartOps.put(productId, JSON.toJSONString(cartVO));
+            CartItemVO cartItemVO = new CartItemVO();
+            cartItemVO.setProductId(cartRequest.getProductId());
+            cartItemVO.setPayNum(cartRequest.getPayNum());
+            cartItemVO.setTitle(productVO.getTitle());
+            cartItemVO.setPrice(productVO.getPrice());
+            cartItemVO.setTotalPrice(cartItemVO.getPrice().multiply(BigDecimal.valueOf(cartRequest.getPayNum())));
+            cartItemVO.setCreateTime(new Date());
+            myCartOps.put(productId, JSON.toJSONString(cartItemVO));
         }else {
             //存在 修改商品数量
-            CartVO cartVO = JSON.parseObject(result, CartVO.class);
-            cartVO.setPayNum(cartVO.getPayNum() + payNum);
-            myCartOps.put(productId, JSON.toJSONString(cartVO));
+            CartItemVO cartItemVO = JSON.parseObject(result, CartItemVO.class);
+            cartItemVO.setPayNum(cartItemVO.getPayNum() + payNum);
+            cartItemVO.setTotalPrice(cartItemVO.getPrice().multiply(BigDecimal.valueOf(cartRequest.getPayNum())));
+            myCartOps.put(productId, JSON.toJSONString(cartItemVO));
         }
         return JsonData.buildSuccess();
 
+    }
+
+    @Override
+    public JsonData clearMyCart() {
+        String carKey = getCarKey();
+        redisTemplate.delete(carKey);
+        return JsonData.buildSuccess();
     }
 
 
