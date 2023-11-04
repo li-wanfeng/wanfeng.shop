@@ -1,13 +1,11 @@
 package com.wanfeng.shop.coupon.controller;
 
+import com.wanfeng.shop.coupon.model.request.NewUserRequest;
 import com.wanfeng.shop.coupon.service.CouponService;
 import com.wanfeng.shop.enums.BizCodeEnum;
 import com.wanfeng.shop.enums.CouponCategoryEnum;
 import com.wanfeng.shop.util.JsonData;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -29,5 +27,16 @@ public class CouponController {
             return JsonData.buildResult(BizCodeEnum.COUPON_NO_EXITS);
         }
         return couponService.ReceiveCoupon(id, CouponCategoryEnum.PROMOTION);
+    }
+
+    /**
+     * 新人注册发放新人优惠券
+     *
+     * @return
+     */
+
+    @PostMapping("new_iser_coupon")
+    public JsonData addNewUserCoupn(@RequestBody NewUserRequest newUserRequest) {
+        return couponService.initUserCoupon(newUserRequest);
     }
 }

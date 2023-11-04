@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wanfeng.shop.coupon.mapper.CouponMapper;
 import com.wanfeng.shop.coupon.model.entity.CouponDO;
 import com.wanfeng.shop.coupon.model.entity.CouponRecordDO;
+import com.wanfeng.shop.coupon.model.request.NewUserRequest;
 import com.wanfeng.shop.coupon.model.vo.CouponVO;
 import com.wanfeng.shop.coupon.service.CouponRecordService;
 import com.wanfeng.shop.coupon.service.CouponService;
@@ -122,6 +123,31 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, CouponDO>
 
         return JsonData.buildSuccess();
 
+    }
+
+    /**
+     * 新人注册之后，没有token的，不需要拦截
+     * @param newUserRequest
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
+    @Override
+    public JsonData initUserCoupon(NewUserRequest newUserRequest) {
+        //1. 需要先构造一个用户
+        LoginUser loginUser = new LoginUser();
+        loginUser.setId(newUserRequest.getUserId());
+        loginUser.setName(newUserRequest.getName());
+        //2. 查询所有的新人优惠券，未过期的
+        QueryWrapper<CouponDO> couponDOQueryWrapper = new QueryWrapper<>();
+        couponDOQueryWrapper.eq("category",CouponCategoryEnum.NEW_USER.name())
+                .eq("publish",CouponPublishEnum.PUBLISH.name())
+                .gt("stock",0);
+        List<CouponDO> couponDOS = this.baseMapper.selectList(couponDOQueryWrapper);
+        couponDOS.stream().forEach(couponDO -> {
+            //2.1 幂等操作，调用需要加锁
+            this.ReceiveCoupon(couponDO.getId(),CouponCategoryEnum.NEW_USER);
+        });
+        return JsonData.buildSuccess();
     }
 
     /**
