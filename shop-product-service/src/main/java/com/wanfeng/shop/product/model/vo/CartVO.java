@@ -19,7 +19,7 @@ public class CartVO implements Serializable {
     /**
      * 购买总件数
      */
-    private Integer totalNum;
+    private Long totalNum;
 
     /**
      * 购物车总价格

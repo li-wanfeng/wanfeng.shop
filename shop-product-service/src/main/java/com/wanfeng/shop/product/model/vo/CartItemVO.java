@@ -32,10 +32,6 @@ public class CartItemVO implements Serializable {
      */
     private BigDecimal totalPrice;
 
-
-
-
-
     /**
      * 创建时间
      */

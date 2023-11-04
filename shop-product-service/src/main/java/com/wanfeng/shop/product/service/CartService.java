@@ -7,4 +7,6 @@ public interface CartService {
     JsonData addProductToCart(CartRequest cartRequest);
 
     JsonData clearMyCart();
+
+    JsonData cartDetail();
 }

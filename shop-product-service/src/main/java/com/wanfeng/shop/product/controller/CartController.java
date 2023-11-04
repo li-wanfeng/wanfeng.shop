@@ -23,4 +23,9 @@ public class CartController {
         return cartService.clearMyCart();
     }
 
+    @GetMapping("cart_detail")
+    public JsonData cartDetail() {
+        return cartService.cartDetail();
+    }
+
 }

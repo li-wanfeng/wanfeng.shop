@@ -6,6 +6,9 @@ import com.wanfeng.shop.product.model.entity.ProductDO;
 import com.wanfeng.shop.product.model.vo.ProductVO;
 import com.wanfeng.shop.util.JsonData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 * @author 85975
 * @description 针对表【product】的数据库操作Service
@@ -16,4 +19,6 @@ public interface ProductService extends IService<ProductDO> {
     JsonData PageProduct(Integer page, Integer size);
 
     ProductVO detailProductById(Long productId);
+
+    List<ProductVO> findProductsByIdBatch(ArrayList<Long> prudectIds);
 }

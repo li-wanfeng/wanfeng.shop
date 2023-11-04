@@ -15,6 +15,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,16 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, ProductDO> im
         }
         return getproductVO(productDO);
 
+    }
+
+    @Override
+    public List<ProductVO> findProductsByIdBatch(ArrayList<Long> prudectIds) {
+        List<ProductDO> productDOS = this.baseMapper.selectList(new QueryWrapper<ProductDO>().in("id", prudectIds));
+        List<ProductVO> productVOS = null;
+        if (null != productDOS && !productDOS.isEmpty()) {
+            productVOS = productDOS.stream().map(this::getproductVO).collect(Collectors.toList());
+        }
+        return productVOS;
     }
 
     private ProductVO getproductVO(ProductDO productDO) {
