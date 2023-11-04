@@ -29,7 +29,14 @@ public enum BizCodeEnum {
      * 地址
      */
     ADDRESS_PARAMS_INCOMPLETE(260001, "地址参数不完整"),
-    ADDRESS_PARAMS_ERROR(260001, "地址参数错误"),
+    ADDRESS_PARAMS_ERROR(260002, "地址参数错误"),
+
+
+    /**
+     * 商品
+     */
+    PRODUCT_NO_EXITS(290001, "商品不存在"),
+    PRODUCT_PARAMS_ERROR(290002, "商品参数错误"),
     /**
      * 优惠券
      */
@@ -64,7 +71,10 @@ public enum BizCodeEnum {
     PAY_ORDER_NOT_EXIST(300005, "订单不存在"),
     PAY_ORDER_STATE_ERROR(300006, "订单状态不正常"),
     PAY_ORDER_PAY_TIMEOUT(300007, "订单支付超时"),
-
+    /**
+     * 购物车
+     */
+    CART_ADD_FAIL(400001,"添加购物车失败"),
 
     /**
      * 流控操作

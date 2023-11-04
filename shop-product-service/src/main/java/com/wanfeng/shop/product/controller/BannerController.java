@@ -15,7 +15,7 @@ public class BannerController {
     @Resource
     private BannerService bannerService;
 
-    @GetMapping("/find/list")
+    @GetMapping("/list")
     public JsonData listBanner() {
         return bannerService.findBannerList();
     }

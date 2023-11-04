@@ -3,6 +3,7 @@ package com.wanfeng.shop.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wanfeng.shop.product.model.entity.ProductDO;
+import com.wanfeng.shop.product.model.vo.ProductVO;
 import com.wanfeng.shop.util.JsonData;
 
 /**
@@ -13,4 +14,6 @@ import com.wanfeng.shop.util.JsonData;
 public interface ProductService extends IService<ProductDO> {
 
     JsonData PageProduct(Integer page, Integer size);
+
+    ProductVO detailProductById(Long productId);
 }

@@ -1,11 +1,10 @@
 package com.wanfeng.shop.product.controller;
 
+import com.wanfeng.shop.enums.BizCodeEnum;
+import com.wanfeng.shop.product.model.vo.ProductVO;
 import com.wanfeng.shop.product.service.ProductService;
 import com.wanfeng.shop.util.JsonData;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -19,5 +18,14 @@ public class ProductController {
     public JsonData PageProduct(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                 @RequestParam(value = "size", defaultValue = "10") Integer size) {
         return productService.PageProduct(page,size);
+    }
+
+    @GetMapping("/detail/{product_id}")
+    public JsonData detailProductById(@PathVariable("product_id") Long productId) {
+        if (null == productId || productId <= 0) {
+            return JsonData.buildResult(BizCodeEnum.PRODUCT_NO_EXITS);
+        }
+        ProductVO productVO = productService.detailProductById(productId);
+        return JsonData.buildSuccess(productVO);
     }
 }
