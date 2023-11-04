@@ -1,6 +1,8 @@
 package com.wanfeng.shop.coupon.controller;
 
 import com.wanfeng.shop.coupon.service.CouponService;
+import com.wanfeng.shop.enums.BizCodeEnum;
+import com.wanfeng.shop.enums.CouponCategoryEnum;
 import com.wanfeng.shop.util.JsonData;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,5 +22,12 @@ public class CouponController {
                                    @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
         return couponService.getCouponPage(page,size);
+    }
+    @GetMapping("receive")
+    public JsonData ReceiveCoupon(@RequestParam("id") Long id) {
+        if (null == id || id <= 0) {
+            return JsonData.buildResult(BizCodeEnum.COUPON_NO_EXITS);
+        }
+        return couponService.ReceiveCoupon(id, CouponCategoryEnum.PROMOTION);
     }
 }

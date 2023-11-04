@@ -3,6 +3,7 @@ package com.wanfeng.shop.coupon.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wanfeng.shop.coupon.model.entity.CouponDO;
+import com.wanfeng.shop.enums.CouponCategoryEnum;
 import com.wanfeng.shop.util.JsonData;
 
 /**
@@ -15,4 +16,6 @@ public interface CouponService extends IService<CouponDO> {
     JsonData getCouponList();
 
     JsonData getCouponPage(Integer page, Integer size);
+
+    JsonData ReceiveCoupon(Long id, CouponCategoryEnum categoryEnum);
 }

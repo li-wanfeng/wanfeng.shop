@@ -19,11 +19,11 @@ public class MailServiceImpl implements MailService {
     public void sendMail(String to, String subject, String content) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         //设置发送人
-        simpleMailMessage.setFrom(from);
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(content);
-        mailSender.send(simpleMailMessage);
+//        simpleMailMessage.setFrom(from);
+//        simpleMailMessage.setTo(to);
+//        simpleMailMessage.setSubject(subject);
+//        simpleMailMessage.setText(content);
+//        mailSender.send(simpleMailMessage);
         log.info("邮件发送成功:{}",simpleMailMessage.toString());
     }
 }

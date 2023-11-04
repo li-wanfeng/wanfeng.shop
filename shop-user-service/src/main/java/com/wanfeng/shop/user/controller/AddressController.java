@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/api/address/v1/")
+@RequestMapping("/api/address/v1")
 public class AddressController {
     @Resource
     private AddressService addressService;
