@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wanfeng.shop.order.mapper.ProductOrderItemMapper">
+<mapper namespace="com.wanfeng.shop.mapper.ProductOrderItemMapper">
 
-    <resultMap id="BaseResultMap" type="com.wanfeng.shop.order.model.entity.ProductOrderItem">
+    <resultMap id="BaseResultMap" type="com.wanfeng.shop.model.entity.ProductOrderItem">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="productOrderId" column="product_order_id" jdbcType="BIGINT"/>
             <result property="outTradeNo" column="out_trade_no" jdbcType="VARCHAR"/>

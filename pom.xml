@@ -7,7 +7,7 @@
     <groupId>com.wanfeng.shop</groupId>
     <artifactId>wanfeng.shop</artifactId>
     <version>1.0-SNAPSHOT</version>
-<!--    父级默认是pom，打包是jar-->
+    <!--    父级默认是pom，打包是jar-->
     <packaging>pom</packaging>
     <modules>
         <module>shop-common</module>
@@ -19,23 +19,31 @@
     </modules>
 
     <properties>
+
+        <!--JDK版本，如果是jdk8则这里是 1.8-->
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+
         <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
-        <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
+        <spring.cloud.version>Hoxton.SR10</spring.cloud.version>
         <alibaba.cloud.version>2.2.1.RELEASE</alibaba.cloud.version>
         <mybatisplus.boot.starter.version>3.5.2</mybatisplus.boot.starter.version>
+
         <lombok.version>1.18.16</lombok.version>
         <commons.lang3.version>3.9</commons.lang3.version>
         <commons.codec.version>1.15</commons.codec.version>
         <springfox.boot.starter.version>3.0.0</springfox.boot.starter.version>
+
         <docker.image.prefix>xdclass-cloud</docker.image.prefix>
 
         <!--跳过单元测试-->
         <skipTests>true</skipTests>
 
     </properties>
+
+
 
     <!--锁定版本-->
     <dependencyManagement>
@@ -82,8 +90,7 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-<!--                如果加了下面的配置，那么别的子maven不会继承这个lombok依赖-->
-<!--                <scope>provided</scope>-->
+                <!--<scope>provided</scope>-->
             </dependency>
 
 
@@ -111,20 +118,41 @@
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${springfox.boot.starter.version}</version>
             </dependency>
+
+
+
+            <!--验证码kaptcha依赖包-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>kaptcha-spring-boot-starter</artifactId>
                 <version>1.1.0</version>
             </dependency>
+
+
+            <!--阿里云oss-->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>3.10.2</version>
+            </dependency>
+
+
+
+            <!-- JWT相关 -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>0.7.0</version>
             </dependency>
+
+
+
+
+            <!--分布式锁-->
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
-                <version>3.17.5</version>
+                <version>3.10.1</version>
             </dependency>
 
         </dependencies>

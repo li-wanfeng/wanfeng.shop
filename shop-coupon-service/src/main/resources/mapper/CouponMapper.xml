@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wanfeng.shop.coupon.mapper.CouponMapper">
+<mapper namespace="com.wanfeng.shop.mapper.CouponMapper">
 
-    <resultMap id="BaseResultMap" type="com.wanfeng.shop.coupon.model.entity.CouponDO">
+    <resultMap id="BaseResultMap" type="com.wanfeng.shop.model.entity.CouponDO">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="category" column="category" jdbcType="VARCHAR"/>
             <result property="publish" column="publish" jdbcType="VARCHAR"/>
