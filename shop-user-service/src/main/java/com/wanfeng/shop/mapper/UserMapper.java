@@ -1,8 +1,8 @@
-package com.wanfeng.shop.user.mapper;
+package com.wanfeng.shop.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wanfeng.shop.user.model.entity.UserDO;
+import com.wanfeng.shop.model.entity.UserDO;
 
 /**
 * @author 85975
